@@ -54,12 +54,45 @@ public class CoralMechanism extends SubsystemBase {
     return !candi.getS2Closed().getValue();
   }
 
+  public void runBack(double speed) {
+    motor.set(speed);
+  }
+
+  public void run(double speed, boolean into) {
+    var s1Closed = candi.getS1Closed();
+    var s2Closed = candi.getS2Closed();
+
+    if (s1Closed.getValue()) {
+
+    }
+
+    if (into) {
+      boolean curr = s1Closed.getValue();
+      inside = !prev && curr;
+      double s = curr ? speed : 0.5 * speed;
+      //if (!isCoralIn())
+      if (inside)
+          s = 0;
+      s *= 0.8;
+      System.out.println("CoralIn Speed " + s);
+      motor.set(-s);
+      prev = curr;
+    }
+    else {
+      prev = true;
+      inside = false;
+      motor.set(-speed);
+    }
+    SmartDashboard.putNumber("Coral Motor Applied Output", motor.getAppliedOutput());
+  }
+
   public void setSpeed(double speed, boolean into) {
     var s1Closed = candi.getS1Closed();
 
     if (into) {
       boolean curr = s1Closed.getValue();
       inside = !prev && curr;
+      speed = 0.5;
       double s = curr ? speed : 0.5 * speed;
       //if (!isCoralIn())
       if (inside)

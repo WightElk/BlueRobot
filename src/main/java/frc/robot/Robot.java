@@ -16,7 +16,8 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     double robot = SmartDashboard.getNumber("Robot", 0);
-    m_robotContainer = robot == 1 ? new AlgaeRobotContainer() : new CoralRobotContainer();
+//    m_robotContainer = robot == 1 ? new AlgaeRobotContainer() : new CoralRobotContainer();
+    m_robotContainer = new CoralRobotContainer();
   }
 
   @Override

@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-
+import frc.robot.generated.ModuleConstants;
 import frc.robot.generated.TunerConstants;
 
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -20,9 +20,24 @@ public class CoralRobotContainer extends RobotContainer {
 
     public final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
+    //TODO
+    public static RobotConstants CoralRobot = new RobotConstants();
+
+    // public ModuleConstants FrontLeft = new ModuleConstants(7, 8, 23, 0.124267578125, 11.5, 11.5, false, false);
+    // public ModuleConstants FrontRight = new ModuleConstants(1, 2, 20, -0.291015625, 11.5, -11.5, false, false);
+    // public ModuleConstants BackLeft = new ModuleConstants(5, 6, 22, 0.048828125, -11.5, 11.5, false, false);
+    // public ModuleConstants BackRight = new ModuleConstants(3, 4, 21, -0.371826171875, -11.5, -11.5, false, false);
+
+
     public CoralRobotContainer() {
-        super(RobotConstants.CoralRobot.FrontLeft, RobotConstants.CoralRobot.FrontRight,
-            RobotConstants.CoralRobot.BackLeft, RobotConstants.CoralRobot.BackRight);
+        // super(RobotConstants.CoralRobot.FrontLeft, RobotConstants.CoralRobot.FrontRight,
+        //     RobotConstants.CoralRobot.BackLeft, RobotConstants.CoralRobot.BackRight);
+        super(
+            new ModuleConstants(7, 8, 23, 0.124267578125, 11.5, 11.5, false, false),
+            new ModuleConstants(1, 2, 20, -0.291015625, 11.5, -11.5, false, false),
+            new ModuleConstants(5, 6, 22, 0.04882812, -11.5, 11.5, false, false),
+            new ModuleConstants(3, 4, 21, -0.371826171875, -11.5, -11.5, false, false)
+        );
         configureBindings();
     }
 

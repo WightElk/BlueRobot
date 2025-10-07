@@ -66,7 +66,7 @@ public class RobotContainer {
     public RobotContainer(ModuleConstants frontLeft, ModuleConstants frontRight, ModuleConstants backLeft, ModuleConstants backRight) {
         drivetrain = createDrivetrain(frontLeft, frontRight, backLeft, backRight);
 
-        configureBindings();
+        //configureBindings();
     }
 
     protected SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> createModuleConstants(ModuleConstants constants) {
@@ -99,7 +99,7 @@ public class RobotContainer {
 //                        -joystick.getLeftY() * MaxSpeed
                     ) // Drive forward with negative Y (forward)
                     .withVelocityY(
-                        MaxSpeed * m_yspeedLimiter.calculate(-joystick.getLeftY())
+                        MaxSpeed * m_yspeedLimiter.calculate(-joystick.getLeftX())
 //                        MaxSpeed * sensitivityPos.transfer(-joystick.getLeftX())
 //                        -joystick.getLeftX() * MaxSpeed
                     ) // Drive left with negative X (left)

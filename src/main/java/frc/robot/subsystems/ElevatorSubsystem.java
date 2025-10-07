@@ -112,7 +112,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void moveToL1() {
-    targetPosition = -8.5;
+    targetPosition = -7;
     closedLoop.setReference(targetPosition, SparkMax.ControlType.kPosition);
   }
 
