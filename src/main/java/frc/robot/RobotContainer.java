@@ -6,9 +6,11 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -23,12 +25,16 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 import frc.robot.subsystems.CoralMechanism;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.CoralCommand;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
-    private final CoralMechanism toggleMotor = new CoralMechanism();
+    private final CANBus kCANBus = new CANBus("rio");
+
+    private final CoralMechanism coralMech = new CoralMechanism(kCANBus);
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -45,6 +51,18 @@ public class RobotContainer {
 
     public final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
+    private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
+//    public final CoralCommand coralCommand = new CoralCommand(coralMech);
+
+    private final Sensitivity sensitivityPos = 
+        new Sensitivity(OperatorConstants.Threshold, OperatorConstants.ZeroValue, OperatorConstants.CuspX, OperatorConstants.LinCoef, OperatorConstants.SpeedLimitX);
+
+    //TODO Rot constants
+  private final Sensitivity sensitivityRot = 
+        new Sensitivity(OperatorConstants.Threshold, OperatorConstants.ZeroValue, OperatorConstants.CuspX, OperatorConstants.LinCoef, OperatorConstants.SpeedLimitRot);
+
     public RobotContainer() {
         configureBindings();
     }
@@ -55,9 +73,22 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(
+//                    MaxSpeed * m_xspeedLimiter.calculate(-joystick.getLeftY())
+//                        MaxSpeed * m_xspeedLimiter.calculate(sensitivityPos.transfer(-joystick.getLeftY()))
+                    MaxSpeed * sensitivityPos.transfer(-joystick.getLeftY())
+//                        -joystick.getLeftY() * MaxSpeed
+                    ) // Drive forward with negative Y (forward)
+                    .withVelocityY(
+//                        MaxSpeed * m_yspeedLimiter.calculate(-joystick.getLeftX())
+//                        MaxSpeed * m_yspeedLimiter.calculate(sensitivityPos.transfer(-joystick.getLeftX()))
+                        MaxSpeed * sensitivityPos.transfer(-joystick.getLeftX())
+//                        -joystick.getLeftX() * MaxSpeed
+                    ) // Drive left with negative X (left)
+                    .withRotationalRate(
+                        MaxSpeed * m_rotLimiter.calculate(-joystick.getRightX())
+//                        -joystick.getRightX() * MaxAngularRate
+                    ) // Drive counterclockwise with negative X (left)
             )
         );
 
@@ -71,31 +102,36 @@ public class RobotContainer {
         
 
         joystick.x().whileTrue(drivetrain.applyRequest(() -> brake));
-        joystick.b().whileTrue(drivetrain.applyRequest(() ->
+        joystick.rightBumper().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
         ));
 
         // Coral Mechanism
         // Run Coral motor based on right trigger pressure
-        toggleMotor.setDefaultCommand(
-            new RunCommand(
-                () -> {
-                    double forward = joystick.getRightTriggerAxis(); // 0 → 1
-                    double reverse = joystick.getLeftTriggerAxis();  // 0 → 1
-                    double speed = forward - reverse; // right = positive, left = negative
-                    toggleMotor.setSpeed(speed);
-                },
-                toggleMotor
-            )
-        );
+        // coralMech.setDefaultCommand(
+        //     new RunCommand(
+        //         () -> {
+        //             double forward = joystick.getRightTriggerAxis(); // 0 → 1
+        //             double reverse = joystick.getLeftTriggerAxis();  // 0 → 1
+        //             double speed = forward - reverse; // right = positive, left = negative
+        //             coralMech.setSpeed(speed, true);
+        //         },
+        //         coralMech
+        //     )
+        // );
+
+        // OR leftTrigger(0.0).onTrue
+        joystick.rightTrigger().whileTrue(new CoralCommand(coralMech, () -> joystick.getRightTriggerAxis(), true));
+        //joystick.leftTrigger().whileTrue(new CoralCommand(coralMech, () -> joystick.getLeftTriggerAxis(), false));
+
 
         //Elevator bindings
         joystick.povDown().whileTrue(new RunCommand(() -> elevator.jogUp(), elevator));
         joystick.povUp().whileTrue(new RunCommand(() -> elevator.jogDown(), elevator));
         joystick.povLeft().or(joystick.povRight()).whileTrue(new RunCommand(() -> elevator.stop(), elevator));
 
-        joystick.b().onTrue(new RunCommand(() -> elevator.moveToTop(), elevator));
-        joystick.y().onTrue(new RunCommand(() -> elevator.moveToL1(), elevator));
+        joystick.y().onTrue(new RunCommand(() -> elevator.moveToTop(), elevator));
+        joystick.b().onTrue(new RunCommand(() -> elevator.moveToL1(), elevator));
         joystick.a().onTrue(new RunCommand(() -> elevator.moveToBottom(), elevator));
 
         // Run SysId routines when holding back/start and X/Y.
