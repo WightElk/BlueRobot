@@ -22,11 +22,14 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 import frc.robot.subsystems.CoralMechanism;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.VisionConstants;
 import frc.robot.commands.CoralCommand;
+import frc.robot.commands.DriveToTag;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -48,6 +51,7 @@ public class RobotContainer {
     private final CommandXboxController joystick = new CommandXboxController(0);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    private final VisionSubsystem vision;
 
     public final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
@@ -64,6 +68,8 @@ public class RobotContainer {
         new Sensitivity(OperatorConstants.Threshold, OperatorConstants.ZeroValue, OperatorConstants.CuspX, OperatorConstants.LinCoef, OperatorConstants.SpeedLimitRot);
 
     public RobotContainer() {
+    // Single camera vision for AprilTag detection
+        vision = new VisionSubsystem(VisionConstants.CAMERA_NAME);    
         configureBindings();
     }
 
@@ -143,6 +149,10 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+
+            // Vision control bindings (driver controller only)
+        // Left bumper: Drive to AprilTag (vision-guided alignment)
+        joystick.leftBumper().whileTrue(new DriveToTag(vision, drivetrain));
 
         drivetrain.registerTelemetry(logger::telemeterize);
     }
