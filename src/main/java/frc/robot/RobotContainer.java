@@ -5,9 +5,11 @@
 package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
+import static frc.robot.generated.TunerConstants.ConstantCreator;
 
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -18,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 
+import frc.robot.generated.ModuleConstants;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
@@ -48,12 +51,14 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
-    private final CommandXboxController joystick = new CommandXboxController(0);
+    protected final CommandXboxController joystick = new CommandXboxController(0);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     private final VisionSubsystem vision;
 
-    public final ElevatorSubsystem elevator = new ElevatorSubsystem();
+    private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
 
     private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
     private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
@@ -73,7 +78,7 @@ public class RobotContainer {
         configureBindings();
     }
 
-    private void configureBindings() {
+    protected void configureBindings() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
         drivetrain.setDefaultCommand(
