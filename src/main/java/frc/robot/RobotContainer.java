@@ -8,8 +8,6 @@ import static edu.wpi.first.units.Units.*;
 import static frc.robot.generated.TunerConstants.ConstantCreator;
 
 import com.ctre.phoenix6.CANBus;
-import com.ctre.phoenix6.configs.CANcoderConfiguration;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
@@ -27,17 +25,22 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 import frc.robot.subsystems.CoralMechanism;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.VisionConstants;
 import frc.robot.commands.CoralCommand;
+import frc.robot.commands.DriveToTag;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
     private final CANBus kCANBus = new CANBus("rio");
+
+    private final CoralMechanism coralMech = new CoralMechanism(kCANBus);
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -50,41 +53,29 @@ public class RobotContainer {
 
     protected final CommandXboxController joystick = new CommandXboxController(0);
 
-    public final CommandSwerveDrivetrain drivetrain;// = TunerConstants.createDrivetrain();
+    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    private final VisionSubsystem vision;
 
     private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
     private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
     private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
 
+    private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
+//    public final CoralCommand coralCommand = new CoralCommand(coralMech);
+
     private final Sensitivity sensitivityPos = 
         new Sensitivity(OperatorConstants.Threshold, OperatorConstants.ZeroValue, OperatorConstants.CuspX, OperatorConstants.LinCoef, OperatorConstants.SpeedLimitX);
 
     //TODO Rot constants
-    private final Sensitivity sensitivityRot =
+  private final Sensitivity sensitivityRot = 
         new Sensitivity(OperatorConstants.Threshold, OperatorConstants.ZeroValue, OperatorConstants.CuspX, OperatorConstants.LinCoef, OperatorConstants.SpeedLimitRot);
 
-    public RobotContainer(ModuleConstants frontLeft, ModuleConstants frontRight, ModuleConstants backLeft, ModuleConstants backRight) {
-        drivetrain = createDrivetrain(frontLeft, frontRight, backLeft, backRight);
-
-        //configureBindings();
-    }
-
-    protected SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> createModuleConstants(ModuleConstants constants) {
-        return ConstantCreator.createModuleConstants(
-            constants.steerMotorId, constants.driveMotorId, constants.encoderId,
-            constants.encoderOffset,
-            constants.xPos, constants.yPos,
-            TunerConstants.kInvertLeftSide,
-            constants.steerMotorInverted, constants.encoderInverted
-        );
-    }
-
-    public CommandSwerveDrivetrain createDrivetrain(ModuleConstants frontLeft, ModuleConstants frontRight, ModuleConstants backLeft, ModuleConstants backRight) {
-        return new CommandSwerveDrivetrain(
-            TunerConstants.DrivetrainConstants,
-            createModuleConstants(frontLeft), createModuleConstants(frontRight),
-            createModuleConstants(backLeft), createModuleConstants(backRight)
-        );
+    public RobotContainer() {
+    // Single camera vision for AprilTag detection
+        vision = new VisionSubsystem(VisionConstants.CAMERA_NAME);    
+        configureBindings();
     }
 
     protected void configureBindings() {
@@ -94,13 +85,15 @@ public class RobotContainer {
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
                 drive.withVelocityX(
-                    MaxSpeed * m_xspeedLimiter.calculate(-joystick.getLeftY())
-//                    MaxSpeed * sensitivityPos.transfer(-joystick.getLeftY())
+//                    MaxSpeed * m_xspeedLimiter.calculate(-joystick.getLeftY())
+//                        MaxSpeed * m_xspeedLimiter.calculate(sensitivityPos.transfer(-joystick.getLeftY()))
+                    MaxSpeed * sensitivityPos.transfer(-joystick.getLeftY())
 //                        -joystick.getLeftY() * MaxSpeed
                     ) // Drive forward with negative Y (forward)
                     .withVelocityY(
-                        MaxSpeed * m_yspeedLimiter.calculate(-joystick.getLeftX())
-//                        MaxSpeed * sensitivityPos.transfer(-joystick.getLeftX())
+//                        MaxSpeed * m_yspeedLimiter.calculate(-joystick.getLeftX())
+//                        MaxSpeed * m_yspeedLimiter.calculate(sensitivityPos.transfer(-joystick.getLeftX()))
+                        MaxSpeed * sensitivityPos.transfer(-joystick.getLeftX())
 //                        -joystick.getLeftX() * MaxSpeed
                     ) // Drive left with negative X (left)
                     .withRotationalRate(
@@ -124,6 +117,34 @@ public class RobotContainer {
             point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
         ));
 
+        // Coral Mechanism
+        // Run Coral motor based on right trigger pressure
+        // coralMech.setDefaultCommand(
+        //     new RunCommand(
+        //         () -> {
+        //             double forward = joystick.getRightTriggerAxis(); // 0 → 1
+        //             double reverse = joystick.getLeftTriggerAxis();  // 0 → 1
+        //             double speed = forward - reverse; // right = positive, left = negative
+        //             coralMech.setSpeed(speed, true);
+        //         },
+        //         coralMech
+        //     )
+        // );
+
+        // OR leftTrigger(0.0).onTrue
+        joystick.rightTrigger().whileTrue(new CoralCommand(coralMech, () -> joystick.getRightTriggerAxis(), true));
+        //joystick.leftTrigger().whileTrue(new CoralCommand(coralMech, () -> joystick.getLeftTriggerAxis(), false));
+
+
+        //Elevator bindings
+        joystick.povDown().whileTrue(new RunCommand(() -> elevator.jogUp(), elevator));
+        joystick.povUp().whileTrue(new RunCommand(() -> elevator.jogDown(), elevator));
+        joystick.povLeft().or(joystick.povRight()).whileTrue(new RunCommand(() -> elevator.stop(), elevator));
+
+        joystick.y().onTrue(new RunCommand(() -> elevator.moveToTop(), elevator));
+        joystick.b().onTrue(new RunCommand(() -> elevator.moveToL1(), elevator));
+        joystick.a().onTrue(new RunCommand(() -> elevator.moveToBottom(), elevator));
+
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.
         joystick.back().and(joystick.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
@@ -133,6 +154,10 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+
+            // Vision control bindings (driver controller only)
+        // Left bumper: Drive to AprilTag (vision-guided alignment)
+        joystick.leftBumper().whileTrue(new DriveToTag(vision, drivetrain));
 
         drivetrain.registerTelemetry(logger::telemeterize);
     }

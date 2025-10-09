@@ -10,16 +10,9 @@ public class CoralCommand extends Command {
     private final DoubleSupplier speed;
     private boolean into = true;
 
-    private boolean coralInside = false;
-    enum CoralStage {
-        In,
-        Inside,
-        Out
-    }
-    private CoralStage stage = CoralStage.In;
-
     public CoralCommand(CoralMechanism coral, DoubleSupplier speed, boolean into)
     {
+        System.out.println("CoralIn CONSTRUCTOR ");
         coralMech = coral;
         this.speed = speed;
         this.into = into;
@@ -28,22 +21,22 @@ public class CoralCommand extends Command {
 
     @Override
     public void initialize() {
-        stage = CoralStage.In;
+        coralMech.reset();
     }
   
     @Override
     public void execute() {
-        if (stage == CoralStage.In)
-            coralMech.setSpeed(speed.getAsDouble(), into);
+        coralMech.setSpeed(speed.getAsDouble(), into);
     }
   
     @Override
     public void end(boolean interrupted) {
-        coralMech.setSpeed(0, true);
+        coralMech.setSpeed1(0);
     }
   
     @Override
     public boolean isFinished() {
-        return false;//coralMech.isCoralIn();
+        //System.out.println("CoralIn isFinished ");
+        return coralMech.isCoralIn();
     }
 }
