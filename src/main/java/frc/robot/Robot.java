@@ -18,7 +18,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = which == 0 ? new CoralRobotContainer(RobotConfig.CoralRobot.frontLeft,
     RobotConfig.CoralRobot.frontRight,
     RobotConfig.CoralRobot.backLeft,
-    RobotConfig.CoralRobot.backRight) : new RobotContainer();
+    RobotConfig.CoralRobot.backRight) : null;
   }
 
   @Override

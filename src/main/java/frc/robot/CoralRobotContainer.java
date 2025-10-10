@@ -33,9 +33,7 @@ import frc.robot.subsystems.CoralMechanism;
 public class CoralRobotContainer extends RobotContainer {
 
     public CoralRobotContainer(SwerveModuleConfig fl, SwerveModuleConfig fr, SwerveModuleConfig bl, SwerveModuleConfig br) {
-        super();
-
-        drivetrain = createDrivetrain(fl, fr, bl, br);
+        super(fl, fr, bl, br);
 
         configureBindings();
     }

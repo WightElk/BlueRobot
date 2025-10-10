@@ -51,8 +51,8 @@ public class RobotContainer {
 
     public final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
-    public RobotContainer() {
-        // drivetrain = createDrivetrain();
+    public RobotContainer(SwerveModuleConfig fl, SwerveModuleConfig fr, SwerveModuleConfig bl, SwerveModuleConfig br) {
+        drivetrain = createDrivetrain(fl, fr, bl, br);
     }
 
     public void configureBindings() {
