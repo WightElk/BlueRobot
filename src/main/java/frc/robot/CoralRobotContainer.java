@@ -35,10 +35,7 @@ public class CoralRobotContainer extends RobotContainer {
     public CoralRobotContainer(SwerveModuleConfig fl, SwerveModuleConfig fr, SwerveModuleConfig bl, SwerveModuleConfig br) {
         super();
 
-        drivetrain = createDrivetrain(RobotConfig.CoralRobot.frontLeft,
-            RobotConfig.CoralRobot.frontRight,
-            RobotConfig.CoralRobot.backLeft,
-            RobotConfig.CoralRobot.backRight);
+        drivetrain = createDrivetrain(fl, fr, bl, br);
 
         configureBindings();
     }
