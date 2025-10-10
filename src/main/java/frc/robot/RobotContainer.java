@@ -124,6 +124,9 @@ public class RobotContainer {
     }
 
 
+
+
+    private final SwerveModuleConfig fl = new SwerveModuleConfig(7, 8, 23, 0.124267578125, 11.5, 11.5, false, false);
         // Front Left
     public static final int kFrontLeftDriveMotorId = 7;
     public static final int kFrontLeftSteerMotorId = 8;
@@ -136,6 +139,7 @@ public class RobotContainer {
     public static final Distance kFrontLeftYPos = Inches.of(11.5);
 
 
+    private final SwerveModuleConfig fr = new SwerveModuleConfig(1, 2, 20, -0.291015625, 11.5, -11.5, false, false);
     // Front Right
     public static final int kFrontRightDriveMotorId = 1;
     public static final int kFrontRightSteerMotorId = 2;
@@ -147,6 +151,7 @@ public class RobotContainer {
     public static final Distance kFrontRightXPos = Inches.of(11.5);
     public static final Distance kFrontRightYPos = Inches.of(-11.5);
 
+    private final SwerveModuleConfig bl = new SwerveModuleConfig(5, 6, 22, 0.048828125, -11.5, 11.5, false, false);
     // Back Left
     public static final int kBackLeftDriveMotorId = 5;
     public static final int kBackLeftSteerMotorId = 6;
@@ -158,6 +163,7 @@ public class RobotContainer {
     public static final Distance kBackLeftXPos = Inches.of(-11.5);
     public static final Distance kBackLeftYPos = Inches.of(11.5);
 
+    private final SwerveModuleConfig br = new SwerveModuleConfig(3, 4, 21, -0.371826171875, -11.5, -11.5, false, false);
     // Back Right
     public static final int kBackRightDriveMotorId = 3;
     public static final int kBackRightSteerMotorId = 4;
@@ -168,6 +174,7 @@ public class RobotContainer {
 
     public static final Distance kBackRightXPos = Inches.of(-11.5);
     public static final Distance kBackRightYPos = Inches.of(-11.5);
+
 
     
     /**
