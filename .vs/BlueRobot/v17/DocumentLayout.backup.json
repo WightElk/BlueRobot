@@ -1,0 +1,134 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\dev\\FRC\\BlueRobot\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\RobotContainer.java||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main\\java\\frc\\robot\\RobotContainer.java||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\AlgaeRobotContainer.java||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main\\java\\frc\\robot\\AlgaeRobotContainer.java||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\subsystems\\CommandSwerveDrivetrain.java||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main\\java\\frc\\robot\\subsystems\\CommandSwerveDrivetrain.java||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\CoralRobotContainer.java||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main\\java\\frc\\robot\\CoralRobotContainer.java||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\generated\\TunerConstants.java||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main\\java\\frc\\robot\\generated\\TunerConstants.java||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\Robot.java||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main\\java\\frc\\robot\\Robot.java||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 163,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RobotContainer.java",
+              "DocumentMoniker": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\RobotContainer.java",
+              "RelativeDocumentMoniker": "src\\main\\java\\frc\\robot\\RobotContainer.java",
+              "ToolTip": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\RobotContainer.java",
+              "RelativeToolTip": "src\\main\\java\\frc\\robot\\RobotContainer.java",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADwAAAAZAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADHSURBVDhPrZMxCoMwGEZfigUHBzcXBw/hQYTMTl7Cwa1H8ggexMXFzUGwiPB3qTaxolT74Fs\u002BwiP5kyi3GIWTPB93eAtOxS1Gua2tv2IJ6rpeYqK1pqoqq5uxBHmeE0URaZqaNZ7nEYah1c1YgrZtAWiaxqx3\u002Be8MgiAAWLabZRlxHJMkCX3fm0s/mNdoAkhZliIiMgyDaK03r/HwHfi\u002BL47jfPWz4HAGXdcxTdO6XjgUHGEJRGQze1gCpdRm9rh8BHXlOwO8AC\u002BLg0OuH/FKAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-10-01T03:31:03.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AlgaeRobotContainer.java",
+              "DocumentMoniker": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\AlgaeRobotContainer.java",
+              "RelativeDocumentMoniker": "src\\main\\java\\frc\\robot\\AlgaeRobotContainer.java",
+              "ToolTip": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\AlgaeRobotContainer.java",
+              "RelativeToolTip": "src\\main\\java\\frc\\robot\\AlgaeRobotContainer.java",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAACEAAAAOAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADHSURBVDhPrZMxCoMwGEZfigUHBzcXBw/hQYTMTl7Cwa1H8ggexMXFzUGwiPB3qTaxolT74Fs\u002BwiP5kyi3GIWTPB93eAtOxS1Gua2tv2IJ6rpeYqK1pqoqq5uxBHmeE0URaZqaNZ7nEYah1c1YgrZtAWiaxqx3\u002Be8MgiAAWLabZRlxHJMkCX3fm0s/mNdoAkhZliIiMgyDaK03r/HwHfi\u002BL47jfPWz4HAGXdcxTdO6XjgUHGEJRGQze1gCpdRm9rh8BHXlOwO8AC\u002BLg0OuH/FKAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-10-01T03:25:07.577Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CommandSwerveDrivetrain.java",
+              "DocumentMoniker": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\subsystems\\CommandSwerveDrivetrain.java",
+              "RelativeDocumentMoniker": "src\\main\\java\\frc\\robot\\subsystems\\CommandSwerveDrivetrain.java",
+              "ToolTip": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\subsystems\\CommandSwerveDrivetrain.java",
+              "RelativeToolTip": "src\\main\\java\\frc\\robot\\subsystems\\CommandSwerveDrivetrain.java",
+              "ViewState": "AgIAALMAAAAAAAAAAAAAAIEAAAAdAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADHSURBVDhPrZMxCoMwGEZfigUHBzcXBw/hQYTMTl7Cwa1H8ggexMXFzUGwiPB3qTaxolT74Fs\u002BwiP5kyi3GIWTPB93eAtOxS1Gua2tv2IJ6rpeYqK1pqoqq5uxBHmeE0URaZqaNZ7nEYah1c1YgrZtAWiaxqx3\u002Be8MgiAAWLabZRlxHJMkCX3fm0s/mNdoAkhZliIiMgyDaK03r/HwHfi\u002BL47jfPWz4HAGXdcxTdO6XjgUHGEJRGQze1gCpdRm9rh8BHXlOwO8AC\u002BLg0OuH/FKAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-10-01T03:19:47.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CoralRobotContainer.java",
+              "DocumentMoniker": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\CoralRobotContainer.java",
+              "RelativeDocumentMoniker": "src\\main\\java\\frc\\robot\\CoralRobotContainer.java",
+              "ToolTip": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\CoralRobotContainer.java",
+              "RelativeToolTip": "src\\main\\java\\frc\\robot\\CoralRobotContainer.java",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAEYAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADHSURBVDhPrZMxCoMwGEZfigUHBzcXBw/hQYTMTl7Cwa1H8ggexMXFzUGwiPB3qTaxolT74Fs\u002BwiP5kyi3GIWTPB93eAtOxS1Gua2tv2IJ6rpeYqK1pqoqq5uxBHmeE0URaZqaNZ7nEYah1c1YgrZtAWiaxqx3\u002Be8MgiAAWLabZRlxHJMkCX3fm0s/mNdoAkhZliIiMgyDaK03r/HwHfi\u002BL47jfPWz4HAGXdcxTdO6XjgUHGEJRGQze1gCpdRm9rh8BHXlOwO8AC\u002BLg0OuH/FKAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-09-30T02:10:01.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TunerConstants.java",
+              "DocumentMoniker": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\generated\\TunerConstants.java",
+              "RelativeDocumentMoniker": "src\\main\\java\\frc\\robot\\generated\\TunerConstants.java",
+              "ToolTip": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\generated\\TunerConstants.java",
+              "RelativeToolTip": "src\\main\\java\\frc\\robot\\generated\\TunerConstants.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAbAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADHSURBVDhPrZMxCoMwGEZfigUHBzcXBw/hQYTMTl7Cwa1H8ggexMXFzUGwiPB3qTaxolT74Fs\u002BwiP5kyi3GIWTPB93eAtOxS1Gua2tv2IJ6rpeYqK1pqoqq5uxBHmeE0URaZqaNZ7nEYah1c1YgrZtAWiaxqx3\u002Be8MgiAAWLabZRlxHJMkCX3fm0s/mNdoAkhZliIiMgyDaK03r/HwHfi\u002BL47jfPWz4HAGXdcxTdO6XjgUHGEJRGQze1gCpdRm9rh8BHXlOwO8AC\u002BLg0OuH/FKAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-09-30T01:55:12.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Robot.java",
+              "DocumentMoniker": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\Robot.java",
+              "RelativeDocumentMoniker": "src\\main\\java\\frc\\robot\\Robot.java",
+              "ToolTip": "C:\\dev\\FRC\\BlueRobot\\src\\main\\java\\frc\\robot\\Robot.java",
+              "RelativeToolTip": "src\\main\\java\\frc\\robot\\Robot.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAzAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADHSURBVDhPrZMxCoMwGEZfigUHBzcXBw/hQYTMTl7Cwa1H8ggexMXFzUGwiPB3qTaxolT74Fs\u002BwiP5kyi3GIWTPB93eAtOxS1Gua2tv2IJ6rpeYqK1pqoqq5uxBHmeE0URaZqaNZ7nEYah1c1YgrZtAWiaxqx3\u002Be8MgiAAWLabZRlxHJMkCX3fm0s/mNdoAkhZliIiMgyDaK03r/HwHfi\u002BL47jfPWz4HAGXdcxTdO6XjgUHGEJRGQze1gCpdRm9rh8BHXlOwO8AC\u002BLg0OuH/FKAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-09-30T01:57:14.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

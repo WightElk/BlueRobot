@@ -6,7 +6,11 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -41,11 +45,13 @@ public class RobotContainer {
 
     private final CommandXboxController joystick = new CommandXboxController(0);
 
-    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    public final CommandSwerveDrivetrain drivetrain;
 
     public final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
     public RobotContainer() {
+        drivetrain = createDrivetrain();
+
         configureBindings();
     }
 
@@ -113,5 +119,42 @@ public class RobotContainer {
 
     public Command getAutonomousCommand() {
         return Commands.print("No autonomous command configured");
+    }
+
+
+    public static final SwerveDrivetrainConstants DrivetrainConstants = new SwerveDrivetrainConstants()
+        .withCANBusName(TunerConstants.kCANBus.getName())
+        .withPigeon2Id(TunerConstants.kPigeonId)
+        .withPigeon2Configs(TunerConstants.pigeonConfigs);
+
+    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontLeft =
+        TunerConstants.ConstantCreator.createModuleConstants(
+            TunerConstants.kFrontLeftSteerMotorId, TunerConstants.kFrontLeftDriveMotorId, TunerConstants.kFrontLeftEncoderId, TunerConstants.kFrontLeftEncoderOffset,
+            TunerConstants.kFrontLeftXPos, TunerConstants.kFrontLeftYPos, TunerConstants.kInvertLeftSide, TunerConstants.kFrontLeftSteerMotorInverted, TunerConstants.kFrontLeftEncoderInverted
+        );
+    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontRight =
+    TunerConstants.ConstantCreator.createModuleConstants(
+            TunerConstants.kFrontRightSteerMotorId, TunerConstants.kFrontRightDriveMotorId, TunerConstants.kFrontRightEncoderId, TunerConstants.kFrontRightEncoderOffset,
+            TunerConstants.kFrontRightXPos, TunerConstants.kFrontRightYPos, TunerConstants.kInvertRightSide, TunerConstants.kFrontRightSteerMotorInverted, TunerConstants.kFrontRightEncoderInverted
+        );
+    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackLeft =
+    TunerConstants.ConstantCreator.createModuleConstants(
+        TunerConstants.kBackLeftSteerMotorId, TunerConstants.kBackLeftDriveMotorId, TunerConstants.kBackLeftEncoderId, TunerConstants.kBackLeftEncoderOffset,
+        TunerConstants.kBackLeftXPos, TunerConstants.kBackLeftYPos, TunerConstants.kInvertLeftSide, TunerConstants.kBackLeftSteerMotorInverted, TunerConstants.kBackLeftEncoderInverted
+        );
+    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackRight =
+    TunerConstants.ConstantCreator.createModuleConstants(
+        TunerConstants.kBackRightSteerMotorId, TunerConstants.kBackRightDriveMotorId, TunerConstants.kBackRightEncoderId, TunerConstants.kBackRightEncoderOffset,
+        TunerConstants.kBackRightXPos, TunerConstants.kBackRightYPos, TunerConstants.kInvertRightSide, TunerConstants.kBackRightSteerMotorInverted, TunerConstants.kBackRightEncoderInverted
+        );
+    
+    /**
+     * Creates a CommandSwerveDrivetrain instance.
+     * This should only be called once in your robot program,.
+     */
+    public static CommandSwerveDrivetrain createDrivetrain() {
+        return new CommandSwerveDrivetrain(
+            DrivetrainConstants, FrontLeft, FrontRight, BackLeft, BackRight
+        );
     }
 }

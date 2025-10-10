@@ -14,7 +14,8 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
 
   public Robot() {
-    m_robotContainer = new RobotContainer();
+    int which = 0;
+    m_robotContainer = which == 0 ? new RobotContainer() : new RobotContainer();
   }
 
   @Override
